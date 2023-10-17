@@ -73,7 +73,7 @@ navbar = dbc.Navbar(
         Input('navbar-toggler', 'n_clicks'),
         State('navbar-collapse', 'is_open')
         )
-def togle_navbar_collapse(n, is_open):
+def toggle_navbar_collapse(n, is_open):
     if n:
         return not is_open
 

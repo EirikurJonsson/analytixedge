@@ -1,10 +1,10 @@
 from components import navbar
+from pages import home
+from dash import html, dcc
 import dash
-from dash import html
 import dash_bootstrap_components as dbc
 
 #https://community.plotly.com/t/structuring-a-large-dash-application-best-practices-to-follow/62739
-
 
 app = dash.Dash(
         __name__,
@@ -27,14 +27,29 @@ def page_layout():
     return html.Div(
             [
                 navbar,
-                dbc.Container(
-                    dash.page_container,
-                    className = 'my-2'
-                    )
+                html.Div(
+                    [
+                        dbc.Container(
+                            dcc.Link(
+                                page['name'] +" | ", href = page['path']
+                                ),
+                            className = 'my-2'
+                            ),
+                        ]
+                    for page in dash.page_registry.values()
+                    ),
+                dash.page_container
                 ]
             )
 
-app.layout = page_layout
+app.layout = dbc.Container(
+        html.Div(
+            [
+                dash.page_container
+                ]
+            ),
+        fluid = True
+        )
 
 
 if __name__ == '__main__':
