@@ -1,58 +1,80 @@
-from components import navbar
-from pages import home
-from dash import html, dcc
-import dash
-import dash_bootstrap_components as dbc
+import dash  # pip install dash
+from dash import Dash, html, dcc
+import dash_bootstrap_components as dbc  # pip install dash-bootstrap-components
 
-#https://community.plotly.com/t/structuring-a-large-dash-application-best-practices-to-follow/62739
+# Code from: https://github.com/plotly/dash-labs/tree/main/docs/demos/multi_page_example1
 
 app = dash.Dash(
-        __name__,
-        use_pages = True,
-        external_stylesheets=[
-            dbc.themes.SLATE,
-            dbc.icons.FONT_AWESOME
-            ],
-        meta_tags = [
-            {
-                'name': 'viewport',
-                'content': 'width=device-width, initial-scale=1'
-                }
-            ],
-        title = 'AnalytixEdge'
-        )
+    __name__, external_stylesheets=[dbc.themes.SUPERHERO], use_pages=True
+)
 
+# for x in dash.page_registry.values():
+#     print(x)
 
-def page_layout():
-    return html.Div(
-            [
-                navbar,
-                html.Div(
-                    [
-                        dbc.Container(
-                            dcc.Link(
-                                page['name'] +" | ", href = page['path']
-                                ),
-                            className = 'my-2'
-                            ),
-                        ]
-                    for page in dash.page_registry.values()
-                    ),
-                dash.page_container
-                ]
-            )
+for i in dash.page_registry.values():
+    print(i)
 
-app.layout = dbc.Container(
-        html.Div(
-            [
-                dash.page_container
-                ]
+navbar = dbc.NavbarSimple(
+    dbc.DropdownMenu(
+        [
+            dbc.DropdownMenuItem(page["name"], href=page["path"])
+            for page in dash.page_registry.values()
+            if page["module"] != "pages.not_found_404"
+        ],
+        nav=True,
+        label="About",
+    ),
+    brand="Multi Page App Plugin Demo",
+    color="light",
+    dark=True,
+    className="mb-2",
+)
+SIDEBAR_STYLE = {
+    "position": "fixed",
+    "top": 0,
+    "left": 0,
+    "bottom": 0,
+    "width": "18rem",
+    "padding": "2rem 1rem",
+    #"background-color": "#f8f9fa",
+}
+
+# the styles for the main content position it to the right of the sidebar and
+# add some padding.
+CONTENT_STYLE = {
+    "margin-left": "18rem",
+    "margin-right": "2rem",
+    "padding": "2rem 1rem",
+}
+sidebar = html.Div(
+    [
+        html.H1("Analytix Edge", className="display-2", style = {'margin-top': '20px', 'offset': 20, 'text-align': 'center'}),
+        html.Hr(),
+        html.P(
+            "Sharper Insights", className = 'lead display-8', style = {'text-align': 'center'}
             ),
-        fluid = True
-        )
+        html.P(
+            "With", className = 'lead display-8', style = {'text-align': 'center'}
+            ),
+        html.P(
+            "Deeper Impact", className="lead display-8", style = {'text-align': 'center'}
+        ),
+        html.Hr(),
+        dbc.Nav(
+            [
+                dbc.NavLink(page['name'], href=page['path'])
+                for page in dash.page_registry.values()
+            ],
+            vertical=True,
+            pills=True,
+        ),
+    ],
+    style=SIDEBAR_STYLE,
+)
 
+app.layout = dbc.Container(html.Div([
+    navbar, sidebar, dash.page_container
+]), fluid=True)
 
-if __name__ == '__main__':
-    app.run_server(
-            debug = True
-            )
+if __name__ == "__main__":
+    app.run_server(debug=True)

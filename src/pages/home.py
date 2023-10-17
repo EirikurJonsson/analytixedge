@@ -2,7 +2,7 @@ import dash
 # Code from: https://github.com/plotly/dash-labs/tree/main/docs/demos/multi_page_example1
 dash.register_page(__name__)
 
-from dash import html, Input, Output, callback
+from dash import Dash, dcc, html, Input, Output, callback
 import dash_bootstrap_components as dbc
 
 layout = dbc.Container(
@@ -10,7 +10,7 @@ layout = dbc.Container(
             dbc.Row(
                 dbc.Col(
                     html.H1('Welcome To Analytix Edge', className='display-3'),
-                    width = {'size': 6, 'offset': 3}
+                    width = {'size': 6, 'offset': 4}
                     ),
                 ),
             dbc.Row(
@@ -21,21 +21,12 @@ layout = dbc.Container(
                         """,
                         className = 'lead',
                         ),
-                    ),
-                ),
-            dbc.Row(
-                dbc.Col(
-                    dbc.Button(
-                        'Learn More',
-                        color = 'primary',
-                        href = './learn-more'
-                        ),
                     width = {
-                        'size': 2,
-                        'offset': 5
+                        'offset': 2
                         }
                     ),
-                ),
+                )
             ],
         fluid = True,
         )
+
