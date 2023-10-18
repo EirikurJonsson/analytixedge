@@ -5,14 +5,8 @@ import dash_bootstrap_components as dbc  # pip install dash-bootstrap-components
 # Code from: https://github.com/plotly/dash-labs/tree/main/docs/demos/multi_page_example1
 
 app = dash.Dash(
-    __name__, external_stylesheets=[dbc.themes.SUPERHERO], use_pages=True
+    __name__, external_stylesheets=[dbc.themes.SLATE], use_pages=True
 )
-
-# for x in dash.page_registry.values():
-#     print(x)
-
-for i in dash.page_registry.values():
-    print(i)
 
 navbar = dbc.NavbarSimple(
     dbc.DropdownMenu(
@@ -24,18 +18,19 @@ navbar = dbc.NavbarSimple(
         nav=True,
         label="About",
     ),
-    brand="Multi Page App Plugin Demo",
-    color="light",
+    brand="",
+    color="secondary",
     dark=True,
-    className="mb-2",
+    className="mb-1",
 )
 SIDEBAR_STYLE = {
     "position": "fixed",
     "top": 0,
     "left": 0,
     "bottom": 0,
-    "width": "18rem",
+    "width": "15%",
     "padding": "2rem 1rem",
+    'height': '100%'
     #"background-color": "#f8f9fa",
 }
 
@@ -48,7 +43,12 @@ CONTENT_STYLE = {
 }
 sidebar = html.Div(
     [
-        html.H1("Analytix Edge", className="display-2", style = {'margin-top': '20px', 'offset': 20, 'text-align': 'center'}),
+        html.Div(
+            [
+                html.Img(src = './assets/images/android-chrome-192x192.png', style = {'margin-top': '10%', 'margin-left': '10%'}),
+                ]
+            ),
+        #html.H1("Analytix Edge", className="display-2", style = {'margin-top': '20px', 'offset': 20, 'text-align': 'center'}),
         html.Hr(),
         html.P(
             "Sharper Insights", className = 'lead display-8', style = {'text-align': 'center'}
@@ -69,6 +69,7 @@ sidebar = html.Div(
             pills=True,
         ),
     ],
+    className = 'sidebar',
     style=SIDEBAR_STYLE,
 )
 
