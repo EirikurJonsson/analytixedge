@@ -8,21 +8,45 @@ app = dash.Dash(
     __name__, external_stylesheets=[dbc.themes.SLATE], use_pages=True
 )
 
-navbar = dbc.NavbarSimple(
-    dbc.DropdownMenu(
-        [
-            dbc.DropdownMenuItem(page["name"], href=page["path"])
-            for page in dash.page_registry.values()
-            if page["module"] != "pages.not_found_404"
-        ],
-        nav=True,
-        label="About",
-    ),
-    brand="",
-    color="secondary",
-    dark=True,
-    className="mb-1",
-)
+navbar = dbc.Navbar(
+        dbc.Container(
+            [
+                html.A(
+                    dbc.Row(
+                        [
+                            dbc.Col(html.Img(src = './assets/images/favicon-32x32.png')),
+                            dbc.Col(dbc.NavbarBrand('Analytix Edge - Sharper Insights Deeper Impact', className = 'ms-2')),
+                            ],
+                        align = 'center',
+                        className = 'g-0',
+                        ),
+                    href = '/',
+                    style = {
+                        'textDecoration': 'none',
+                        },
+                    ),
+                dbc.NavbarToggler(
+                    id = 'navbar-toggler',
+                    n_clicks = 0
+                    ),
+                html.Div(
+                    [
+                        dbc.DropdownMenu(
+                            [
+                                dbc.DropdownMenuItem(page["name"], href=page["path"])
+                                for page in dash.page_registry.values()
+                                if page["module"] != "pages.not_found_404"
+                            ],
+                            nav=True,
+                            label="About",
+                            ),
+                        ]
+                    )
+                ]
+            ),
+        color = 'secondary'
+        )
+
 SIDEBAR_STYLE = {
     "position": "fixed",
     "top": 0,
@@ -74,7 +98,7 @@ sidebar = html.Div(
 )
 
 app.layout = dbc.Container(html.Div([
-    navbar, sidebar, dash.page_container
+    navbar, dash.page_container
 ]), fluid=True)
 
 if __name__ == "__main__":
