@@ -16,7 +16,7 @@ layout = dbc.Container(
         html.P(
             [
                 "What sets us apart is our unique approach to data collection. We specialize in ",
-                html.A("web scraping", href="/web-scraping", target="_blank", title="Click to open in a new tab"),
+                html.A("web scraping", href="/webscraping", target="_blank", title="Click to open in a new tab"),
                 ", a powerful technique that enables us to extract valuable information from the vast world of online data. With web scraping, we harness the immense data resources available on the internet, allowing you to eliminate blind spots and gain critical insights into your industry, customers, and competitors."
             ], 
             className="lead"
