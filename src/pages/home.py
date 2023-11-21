@@ -1,6 +1,6 @@
 import dash
+#dash.register_page(__name__)
 # Code from: https://github.com/plotly/dash-labs/tree/main/docs/demos/multi_page_example1
-dash.register_page(__name__)
 
 from dash import html, Input, Output, callback
 import dash_bootstrap_components as dbc

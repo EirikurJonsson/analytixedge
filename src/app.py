@@ -1,11 +1,12 @@
-from components import navbar
-from pages import home
-from dash import html, dcc
 import dash
 import dash_bootstrap_components as dbc
 
-#https://community.plotly.com/t/structuring-a-large-dash-application-best-practices-to-follow/62739
+from components import navbar
+from pages import home
+from dash import html, dcc
 
+#https://community.plotly.com/t/structuring-a-large-dash-application-best-practices-to-follow/62739
+#https://github.com/bradley-erickson/dash-app-structure/blob/main/src/components/footer.py
 app = dash.Dash(
         __name__,
         use_pages = True,
