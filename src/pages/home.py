@@ -1,41 +1,18 @@
 import dash
-#dash.register_page(__name__)
-# Code from: https://github.com/plotly/dash-labs/tree/main/docs/demos/multi_page_example1
-
-from dash import html, Input, Output, callback
+from dash import html
 import dash_bootstrap_components as dbc
 
+dash.register_page(__name__, path='/')
+
 layout = dbc.Container(
-        [
-            dbc.Row(
-                dbc.Col(
-                    html.H1('Welcome To Analytix Edge', className='display-3'),
-                    width = {'size': 6, 'offset': 3}
-                    ),
-                ),
-            dbc.Row(
-                dbc.Col(
-                    html.P(
-                        """
-                        At Analytix Edge, we are passionate about the transformative potential of data science. Our mission is to empower businesses, organizations, and individuals with the analytical tools and insights they need to thrive in today's data-driven world. We specialize in an array of data-driven services that go beyond traditional data science, including web scraping services and dashboard building.
-                        """,
-                        className = 'lead',
-                        ),
-                    ),
-                ),
-            dbc.Row(
-                dbc.Col(
-                    dbc.Button(
-                        'Learn More',
-                        color = 'primary',
-                        href = './learn-more'
-                        ),
-                    width = {
-                        'size': 2,
-                        'offset': 5
-                        }
-                    ),
-                ),
-            ],
-        fluid = True,
-        )
+    [
+        html.H1("Welcome to AnaytixEdge", className="display-4"),
+
+        html.P("As the sole data scientist at AnalytixEdge, I bring expertise in delivering high-impact data science solutions tailored to your business needs. "
+               "Explore our services and contact us to embark on a data-driven journey."
+               ),
+    ],
+    style={'padding': '20px'}
+)
+
+

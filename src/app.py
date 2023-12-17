@@ -1,59 +1,32 @@
 import dash
+from dash import dcc, html
+from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
 
-from components import navbar
-from pages import home
-from dash import html, dcc
-
-#https://community.plotly.com/t/structuring-a-large-dash-application-best-practices-to-follow/62739
-#https://github.com/bradley-erickson/dash-app-structure/blob/main/src/components/footer.py
+# Set up the app
 app = dash.Dash(
-        __name__,
-        use_pages = True,
-        external_stylesheets=[
-            dbc.themes.SLATE,
-            dbc.icons.FONT_AWESOME
-            ],
-        meta_tags = [
-            {
-                'name': 'viewport',
-                'content': 'width=device-width, initial-scale=1'
-                }
-            ],
-        title = 'AnalytixEdge'
-        )
+    __name__,
+    external_stylesheets=[dbc.themes.SLATE],
+    use_pages=True)
 
-
-def page_layout():
-    return html.Div(
-            [
-                navbar,
-                html.Div(
-                    [
-                        dbc.Container(
-                            dcc.Link(
-                                page['name'] +" | ", href = page['path']
-                                ),
-                            className = 'my-2'
-                            ),
-                        ]
-                    for page in dash.page_registry.values()
-                    ),
-                dash.page_container
-                ]
-            )
-
-app.layout = dbc.Container(
+app.layout = html.Div(
+    [
+        html.Div(
+            'Wellcome to the AnalytixEdge'
+        ),
         html.Div(
             [
-                dash.page_container
-                ]
-            ),
-        fluid = True
-        )
+                dcc.Link(
+                    page['name']+" | ", href=page['path']
+                )
+                for page in dash.page_registry.values()
+            ]
+        ),
+        html.Hr(),
+        dash.page_container
+    ]
+)
 
-
+# Run the app
 if __name__ == '__main__':
-    app.run_server(
-            debug = True
-            )
+    app.run_server(debug=True)
