@@ -12,15 +12,24 @@ app = dash.Dash(
 app.layout = html.Div(
     [
         html.Div(
-            'Wellcome to the AnalytixEdge'
+            className='row',
+            children=[
+                html.Div(
+                    className='one columns',
+                    children=[
+                        html.H1('Welcome to the AnalytixEdge', style = {'textAlign':'center'}),
+                    ]
+                )
+            ]
         ),
         html.Div(
-            [
+            children = [
                 dcc.Link(
-                    page['name']+" | ", href=page['path']
-                )
+                    page['name']+"  ", href=page['path']
+                    , style = {'textAlign':'center', 'margin-right': '20px', 'font-size':'22px'})
                 for page in dash.page_registry.values()
-            ]
+            ],
+                style={'text-align': 'right'}
         ),
         html.Hr(),
         dash.page_container
