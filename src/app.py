@@ -2,12 +2,17 @@ import dash
 from dash import dcc, html
 from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
+import flask
+
+server = flask.Flask(__name__)
 
 # Set up the app
 app = dash.Dash(
     __name__,
     external_stylesheets=[dbc.themes.SLATE],
-    use_pages=True)
+    use_pages=True,
+    server = server
+)
 
 app.layout = html.Div(
     [
