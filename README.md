@@ -1,68 +1,68 @@
-# Analytix Edge
+# Welcome to Reflex!
 
-Welcome to Analytix Edge! We're dedicated to providing cutting-edge analytics solutions to help you gain valuable insights and make informed decisions.
+This is the base Reflex template - installed when you run `reflex init`.
 
-## About Us
+If you want to use a different template, pass the `--template` flag to `reflex init`.
+For example, if you want a more basic starting point, you can run:
 
-Analytix Edge is a leading analytics company specializing in [specific analytics services or industry focus]. Our team of experienced data scientists and analysts is committed to delivering high-quality analytics solutions tailored to your business needs.
+```bash
+reflex init --template blank
+```
 
-## Mission Statement
+## About this Template
 
-At Analytix Edge, our mission is to empower businesses with actionable insights derived from data. We strive to be a trusted partner in your analytics journey, helping you unlock the full potential of your data to drive business growth and innovation.
+This template has the following directory structure:
 
-## Services
+```bash
+├── README.md
+├── assets
+├── rxconfig.py
+└── {your_app}
+    ├── __init__.py
+    ├── components
+    │   ├── __init__.py
+    │   └── sidebar.py
+    ├── pages
+    │   ├── __init__.py
+    │   ├── dashboard.py
+    │   ├── index.py
+    │   └── settings.py
+    ├── styles.py
+    ├── templates
+    │   ├── __init__.py
+    │   └── template.py
+    └── {your_app}.py
+```
 
-### Data Analytics
+See the [Project Structure docs](https://reflex.dev/docs/getting-started/project-structure/) for more information on general Reflex project structure.
 
-Unlock the power of your data with our advanced data analytics services. We provide:
+### Adding Pages
 
-- Descriptive Analytics
-- Predictive Analytics
-- Prescriptive Analytics
+In this template, the pages in your app are defined in `{your_app}/pages/`.
+Each page is a function that returns a Reflex component.
+For example, to edit this page you can modify `{your_app}/pages/index.py`.
+See the [pages docs](https://reflex.dev/docs/components/pages/) for more information on pages.
 
-### Business Intelligence
+In this template, instead of using `rx.add_page` or the `@rx.page` decorator,
+we use the `@template` decorator from `{your_app}/templates/template.py`.
 
-Transform raw data into meaningful visualizations and reports. Our business intelligence services include:
+To add a new page:
 
-- Dashboard Development
-- Data Visualization
-- Custom Reporting
+1. Add a new file in `{your_app}/pages/`. We recommend using one file per page, but you can also group pages in a single file.
+2. Add a new function with the `@template` decorator, which takes the same arguments as `@rx.page`.
+3. Import the page in your `{your_app}/pages/__init__.py` file and it will automatically be added to the app.
 
-### Machine Learning
 
-Stay ahead of the competition by leveraging machine learning algorithms. Our machine learning services cover:
+### Adding Components
 
-- Predictive Modeling
-- Classification and Regression
-- Clustering
+In order to keep your code organized, we recommend putting components that are
+used across multiple pages in the `{your_app}/components/` directory.
 
-## Getting Started
+In this template, we have a sidebar component in `{your_app}/components/sidebar.py`.
 
-1. **Installation:**
-   - Clone this repository: `git clone https://github.com/your-company/analytix-edge.git`
-   - Install dependencies: `pip install -r requirements.txt`
+### Adding State
 
-2. **Usage:**
-   - Explore our sample notebooks in the `examples` directory to see how to use our analytics tools.
-
-3. **Documentation:**
-   - For detailed information on our services, consult the [documentation](docs/).
-
-4. **Contact Us:**
-   - Have questions or need support? Reach out to our team at [support@analytixedge.com](mailto:support@analytixedge.com).
-
-## Contributing
-
-We welcome contributions from the community. If you have ideas for improvements or new features, feel free to submit a pull request.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
-
-## Connect With Us
-
-- Website: [https://www.analytixedge.com](https://www.analytixedge.com)
-- Twitter: [@AnalytixEdge](https://twitter.com/AnalytixEdge)
-- LinkedIn: [Analytix Edge](https://www.linkedin.com/company/analytix-edge)
-
-Thank you for choosing Analytix Edge! We look forward to helping you transform your data into actionable insights.
+As your app grows, we recommend using [substates](https://reflex.dev/docs/state/substates/)
+to organize your state.
+You can either define substates in their own files, or if the state is
+specific to a page, you can define it in the page file itself.
