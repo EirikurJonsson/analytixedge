@@ -118,7 +118,8 @@ def sidebar() -> rx.Component:
                 *[
                     sidebar_item(
                         text=page.get("title", page["route"].strip("/").capitalize()),
-                        icon=page.get("image", "/github.svg"),
+                        icon=page.get("image", "/favicon-32x32.png"),
+                        #icon=page.get("image", "/svg"),
                         url=page["route"],
                     )
                     for page in get_decorated_pages()

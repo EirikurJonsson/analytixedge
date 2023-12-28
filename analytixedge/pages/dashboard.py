@@ -3,6 +3,8 @@ from analytixedge.templates import template
 
 import reflex as rx
 
+import yfinance as yf
+
 
 @template(route="/dashboard", title="Dashboard")
 def dashboard() -> rx.Component:
@@ -13,9 +15,11 @@ def dashboard() -> rx.Component:
     """
     return rx.vstack(
         rx.heading("Dashboard", font_size="3em"),
-        rx.text("Welcome to Reflex!"),
+        rx.text("Welcome The Testing Dashboard!"),
         rx.text(
-            "You can edit this page in ",
+            """
+            Lets look at a simple example of plotting that can be done. This is easy and lets take some input and plot it.
+            """,
             rx.code("{your_app}/pages/dashboard.py"),
         ),
     )
